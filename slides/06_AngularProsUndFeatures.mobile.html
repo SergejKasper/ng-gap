@@ -1,34 +1,132 @@
 <section>
-	<h2>Warum AngularJS?</h2>
-	<ul>
-		<li>Nach initialer Einarbeitung beschleunigt AngularJS die Appentwicklung rasant</li>
-		<ul>
-			<li>Eigene HTML Tags sorgen für leichte Wiederverwendbarkeit von Code </li>
-			<li>Vom Framework und Extensions bereitgestellte HTML Tags decken viele Use Cases ab</li>
-			<li>AngularJS ist leicht testbar</li>
-		</ul>
-		<li>AngularJS bietet eine klare Unterteilung der Anwendung nach dem MVC Pattern</li>
-		<li>Umfangreiche Doku und guter Support</li>
-		<li>Einfache Integration mit Javascript Bibliotheken</li>
-	</ul>
+	<h3>Tieferer Einblick in Angular</h3>
+	<p>
+		<div class="span4 thumbnail">
+			<h4>Directives</h4>
+		</div>
+		<div class="span4 thumbnail">
+			<h4>Services</h4>
+		</div>
+		<div class="span4 thumbnail">
+			<h4>Module</h4>
+		</div>			
+	</p>
 </section>
 <section>
-	<h2>Angular auf einen Blick</h2>
-	<ol>
-		<li>Dependency Injection</li>
-		<li>Service Abstraction</li>
-		<li>Directives</li>
-		<li>Expressions</li>
-		<li>Forms (validation)</li>
-		<li><a href="http://angularjs.de/artikel/angularjs-i18n-ng-translate"></a>i18n</a></li>
-		<li>Modules</li>
-		<li>Filters</li>
-		<li>REST Client</li>
-	</ol>
+	<section>
+		<h3>Services - Services in Angular</h3>
+		<script>
+		angular.module('Vortsetzung', []).controller('einServiceController', function ($scope, coderService) {
+			$scope.$watch("myModel", function watchModel(value) {
+				$scope.myOtherModel =  coderService.concat(value);
+			})
+		}).service('coderService', function(){
+			    this.concat= function(text){
+			        return "Das Coden kann " + text;
+			    }; 
+			});
+		</script>
+		<div ng-controller="einServiceController">
+			<input type="text" ng-model="myModel" style="border" value="weitergehen">
+			<br>
+			<h3> {{myOtherModel}} </h3>
+		</div>
+	</section>
+	<section>
+		<h3>Services - Wie erstelle und verwende ich einen Service?</h3> 
+		<pre><code>
+&lt;script&gt;
+angular
+.controller('einServiceController', function ($scope, coderService) {
+	$scope.myModel = "weitergehen";
+	$scope.$watch("myModel", function watchModel(value) {
+		$scope.myOtherModel =  coderService.concat(value);
+	})
+}).service('coderService', function(){
+    this.concat= function(text){
+        return "Das Coden kann " + text + "!";
+    }; 
+});
+&lt;/script&gt;
+&lt;div ng-controller="einServiceController"&gt;
+	&lt;input type="text" ng-model="myModel" style="border"&gt;
+	&lt;br&gt;
+	&lt;h3&gt; {{myOtherModel}} &lt;/h3&gt;
+&lt;/div&gt;
+		</code></pre>
+	</section>
 </section>
-<!--section>
+<section>
+	<section>
+		<script>
+		angular.module('myUiDirectives', []).directive('myShow', function () {
+		return {
+		 restrict: 'A',
+		 link: function (scope, element, attr) {
+		    scope.$watch(attr.myShow, function(val){
+		    element.css('display', val ? '' : 'none');
+		  });
+		 }
+		};
+		});
+		</script>
+		<h3>Directives - Wie erstelle ich einen eigenen HTML Tag?</h3> 
+		<div class="switch">
+			<input ng-model="showMe" type="checkbox">
+			<label><i></i></label>
+		</div>
+		<div my-show="showMe">
+		<pre><code>
+&lt;h3&gt;Wie erstelle ich einen eigenen Tag?&lt;/h3&gt; 
+&lt;div class="switch"&gt;
+	&lt;input ng-model="showMe" type="checkbox"&gt;
+	&lt;label&gt;&lt;i&gt;&lt;/i&gt;&lt;/label&gt;
+&lt;/div&gt;
+&lt;div my-show="showMe"&gt;
+    &lt;pre&gt;&lt;code&gt;/*Dieses Snippet*/&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+		</code></pre>
+		</div>
+	</section>
+	<section>
+		<h3>Directives - ngShow ein neugeborenes HTML Element</h3>
+		<pre><code>
+angular.directive('myShow', function () {
+return {
+ restrict: 'A',
+ link: function (scope, element, attr) {
+    scope.$watch(attr.myShow, function(val){
+    element.css('display', val ? '' : 'none');
+  });
+ }
+};
+});</code></pre>
+	</section>
+</section>
+<section>
+		<h3>Module - Kapseln von Anwendungslogik im JS</h3>
+		<pre><code>
+&lt;body ng-app="myApp"&gt;
+....
+&lt;/body&gt;
 
-	<h2>Interesse an Angular</h2>
-	<p><script type="text/html" src="http://www.google.de/trends/embed.js?hl=de&q=angularjs+%2B+angular.js,+emberjs+%2B+ember.js,+backbonejs+%2B+backbone.js,+knockoutjs+%2B+knockout.jsr&date=1/2011+33m&cmpt=q&content=1&cid=TIMESERIES_GRAPH_0&export=5&w=800&h=600"></script></p>
-</section-->
+&lt;script&gt;
+angular.module('myApp', ['graphics'])
+.controller('einController', function ($scope) {...})
+.service('coderService', function(){...})
+.directive('directiveX', function () {...});
+&lt;/script&gt;
+
+&lt;script&gt;
+angular.module('graphics', [])
+.service('shapeConverter', function(){...})
+.factory('shape', function(){...})
+.directive('sqareCanvas', function('shapeConverter'){...});
+&lt;/script&gt;
+		</code></pre>
+</section>
+<section>
+	<blockquote>Angular is what the web browser would have been, had it been designed for applications.</blockquote>
+	<p>Misko Hevery (Creator of AngularJS)</p>
+</section>
                 

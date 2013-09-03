@@ -153,7 +153,7 @@ module.exports = function(grunt) {
         sass: {
             main: {
                 files: {
-                	'css/theme/t-systems.css': 'css/theme/source/t-systems.scss'
+                'css/theme/t-systems.css': 'css/theme/source/t-systems.scss'
                 }
             }
         },
@@ -184,7 +184,7 @@ module.exports = function(grunt) {
         connect: {
             server: {
                 options: {
-                    port: 8080,
+                    port: 8081,
                     base: '<%= build_dir %>'
                 }
             }

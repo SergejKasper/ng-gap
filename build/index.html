@@ -12,13 +12,12 @@
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 		
-		<meta name="viewport" content="width=device-width, initial-scale=1.0,  user-scalable=yes">
-
+		<meta name="viewport" content="width=device-width, maximum-scale=1.0,initial-scale=1.0,  user-scalable=no">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/reveal.min.css">
 		<link rel="stylesheet" href="css/theme/t-systems.css" id="theme">
-		<link rel="alternate" href="css/bootstrap.min.css">
 
-		<!-- For syntax highlighting maximum-scale=1.0,-->
+		<!-- For syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 		<script src="http://localhost:35729/livereload.js"></script>
 		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
@@ -35,7 +34,7 @@
 	<script src="js/reveal.min.js"></script>
 	<script src="js/ng-google-chart.js"></script>
 	<script>
-		angular.module('revealAngular', ['googlechart'])
+	angular.module('revealAngular', ['Einstieg','googlechart', 'Vortsetzung'])
 		.controller('ChartCtrl', ['$scope', function ($scope) {
 			$scope.chart = {
   "type": "ColumnChart",
@@ -62,7 +61,7 @@
           },
           {
             "v": 900000,
-            "f": "Anzahl"
+            "f": "900000"
           }
         ]
       },
@@ -73,7 +72,7 @@
           },
           {
             "v": 850000,
-            "f": "Anzahl"
+            "f": "850000"
           }
         ]
       },      
@@ -84,7 +83,7 @@
           },
           {
             "v": 145000,
-            "f": "Anzahl"
+            "f": "145000"
           }
         ]
       },
@@ -95,7 +94,7 @@
           },
           {
             "v": 120000,
-            "f": "Anzahl"
+            "f": "120000"
           }
         ]
       }
@@ -124,87 +123,79 @@
     }
   }
 }
-		}])
+}]).controller('appController', ['$scope', function ($scope) {
+		$scope.object ="Kernfeatures";
+		$scope.features = 
+		[{
+			headline: "Abstraktion durch HTML", 
+			img: ["img/amp-angular-backbone-550x339.png"],
+			href: ["http://localytics.com/wp-content/uploads/2013/04/amp-angular-backbone-550x339.png"],
+			conclusion: ""
+		},
+		{
+			headline: "Model View Controller", 
+			img: ["img/mvc.jpg"], 
+			href: ["http://akquinetblog.files.wordpress.com/2013/01/mvc_diagram_en.jpg%3Fw%3D440"],
+			conclusion: ""
+		},
+		{
+			headline: "Two-Way Databinding", 
+			img: ["img/One_Way_Data_Binding1.png","img/Two_Way_Data_Binding2.png"], 
+			href: ["http://docs.angularjs.org/img/One_Way_Data_Binding.png", "http://docs.angularjs.org/img/Two_Way_Data_Binding.png"],
+			conclusion: ""
+		}];
+	}]) 
+	.controller('angularExcampleController2', ['$scope', function ($scope) {
+		$scope.model = 0;
+		$scope.$watch('model', function(newValue, oldValue, scope) {
+			$scope.modelAsBinary = newValue.toString(2);
+		}); 
+	}])
+	.directive('reveal', [function () {
+		return {
+			restrict: 'A',
+			link: function (scope, iElement, iAttrs) {
+					Reveal.initialize({
+						controls: true,
+						progress: true,
+						history: true,
+						center: true,
 
-			.controller('angularExcampleController', ['$scope', function ($scope) {
-				$scope.object ="Kernfeatures";
-				$scope.features = 
-				[{
-					headline: "Abstraktion durch HTML", 
-					img: ["img/amp-angular-backbone-550x339.png"],
-					href: ["http://localytics.com/wp-content/uploads/2013/04/amp-angular-backbone-550x339.png"],
-					conclusion: ""
-				},
-				{
-					headline: "Model View Controller", 
-					img: ["img/mvc.jpg"], 
-					href: ["http://akquinetblog.files.wordpress.com/2013/01/mvc_diagram_en.jpg%3Fw%3D440"],
-					conclusion: ""
-				},
-				{
-					headline: "Two-Way Databinding", 
-					img: ["img/One_Way_Data_Binding1.png","img/Two_Way_Data_Binding2.png"], 
-					href: ["http://docs.angularjs.org/img/One_Way_Data_Binding.png", "http://docs.angularjs.org/img/Two_Way_Data_Binding.png"],
-					conclusion: ""
-				}];
-			}]) 
-			.controller('angularExcampleController2', ['$scope', function ($scope) {
-				$scope.model = 0;
-				$scope.$watch('model', function(newValue, oldValue, scope) {
-					$scope.modelAsBinary = newValue.toString(2);
-				}); 
-			}])
-			.directive('reveal', [function () {
-				return {
-					restrict: 'A',
-					link: function (scope, iElement, iAttrs) {
-							Reveal.initialize({
-								controls: true,
-								progress: true,
-								history: true,
-								center: true,
+						theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+						transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
-								theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-								transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
-
-								// Optional libraries used to extend on reveal.js
-								dependencies: [
-									{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-									{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-									{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-									{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-									{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-									{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-								]
-							});
-						}
-				};
-			}]);
+						// Optional libraries used to extend on reveal.js
+						dependencies: [
+							{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+							{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+							{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+							{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+							{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+							{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+						]
+					});
+				}
+		};
+	}]);
 		</script>
 		<!--script src="js/bootstrap.min.js" type="text/javascript"></script-->
 		<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.5.0/ui-bootstrap-tpls.min.js" type="text/javascript"></script>
-				<script type="text/javascript" charset="utf-8" src="cordova-2.9.0.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 	</head>
 
 	<body reveal>
 		<div class="reveal">
 		<div class="t-systems-logo">
-			<img src="css/images/t-systems.png">
+			<img src="img/logo_tsystems_mms.gif">
 		</div>
 			<!-- Any section element inside of this container is displayed as a slide -->
-			<script>
-			function myController($scope){
-				$scope.model = "kann beginnen";
-				$scope.emphaticModel = $scope.model + "!!!";
-			}
-			</script>
-			<div class="slides" ng-controller="myController">
+			<div class="slides" ng-controller="appController">
 
-<section data-transition="linear" data-background="#4d7e65" data-background-transition="slide">
+<section data-transition="linear" data-background="url('img/bg.jpg')" data-background-transition="slide">
 		<h1>Hybride Apps mit AngualarJS und PhoneGap</h1>
 		<h3>Ein Ausblick in die Zukunft der hybriden Webentwicklung</h3>
 		<p>
-			<small>Von <a href="https://www.xing.com/profiles/Ivan_Demin">Ivan Demin</a> und <a href="https://www.xing.com/profiles/Sergej_Kasper2">Sergej Kasper</a> für die <a href="http://www.t-systems-mms.com/">T-Systems MMS</a> </small>
+			Von <a href="https://www.xing.com/profiles/Ivan_Demin">Ivan Demin</a> und <a href="https://www.xing.com/profiles/Sergej_Kasper2">Sergej Kasper</a> für die <a href="http://www.t-systems-mms.com/">T-Systems MMS</a> 
 		</p>
 </section><section>
 	<h2>Agenda</h2>
@@ -219,9 +210,47 @@
 </section>
 <section ng-controller="ChartCtrl">
 <div google-chart chart="chart" style="{{chart.cssStyle}}">
-<small>Quelle: Android; Apple; Bloomberg Businessweek; Google; Microsoft; RIM</small>
-</div>
+<small>Quelle: Android; Apple; Bloomberg Businessweek; Google; Microsoft; RIM
+</small></div>
 </section><section>
+<h2>Kategorisierung von Apps</h2>
+<table class="table table-bordered table-hover">
+<thead>
+<tr>
+  <th>#</th>
+  <th><b>Native Apps</b></th>
+  <th><b>Web Apps</b></th>
+  <th><b>Hybride Apps</b></th>
+</tr>
+</thead>
+<tbody>
+<tr class="success">
+  <td><b>Vorteil</b></td>
+  <td>Hardware Zugriff</td>
+  <td>Plattformunabhängigkeit</td>
+  <td>Hardware Zugriff<br>Platformunabhängigkeit</td>
+</tr>
+<tr class="warning">
+  <td><b>Nachteil</b></td>
+  <td>Plattformabhängigkeit</td>
+  <td>Kein Hardware Zugriff</td>
+  <td>Performance</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+    Apps sind thematisch nicht immer eindeutig klassifizierbar. Jedoch lassen sie sich nach ihrer technischen Umsetzung klar unterscheiden. Die Umsetzvarianten von Apps lassen sich in der Kategorien einteilen: Native Apps, Web-Apps und hybride Apps
+
+    native Apps: Sind Apps welche speziell für ein mobiles Betriebssystem entwickelt wurden.
+
+    Web Apps: Können als mobile Webseiten angesehen werden, welche auf die Bildschirmauflösung und an die Bedienung von mobilen Geräten optimiert sind.
+
+    hybride Apps: Hybride Apps bilden eine Zwischenform zwischen nativen Apps und Web-Apps. Ihr Verhalten ähnelt einer nativen App, wobei das Rendering des Layouts der App mit Hilfe integrierten Browsers stattfindet.
+
+</aside>
+</section>
+
+<section>
 	<h2>Hybride App Architektur</h2>
 	<img style="width:800px;" ng-src="img/hybridApp.png"/>
     <aside class="notes">
@@ -237,8 +266,13 @@
     Weitere: http://alternativeto.net/software/phonegap/
     </aside>
 </section>
+<!--section>
+
+	<h2>Interesse an Angular</h2>
+	<p><script type="text/html" src="http://www.google.de/trends/embed.js?hl=de&q=angularjs+%2B+angular.js,+emberjs+%2B+ember.js,+backbonejs+%2B+backbone.js,+knockoutjs+%2B+knockout.jsr&date=1/2011+33m&cmpt=q&content=1&cid=TIMESERIES_GRAPH_0&export=5&w=800&h=600"></script></p>
+</section-->
 <section>
-<img style="width: 125%;" src="http://angularjs.org/img/AngularJS-large.png" alt="AngularJS Logo">
+<img style="width: 100%;" src="img/AngularJS-large.png" alt="AngularJS Logo">
 <ul>
 	<li>Ein innovatives client-seitiges JavaScript Framework</li>
 	<li>Lauffähig auf allen modernen Mobile- und Desktopbrowsern </li>
@@ -264,195 +298,304 @@
 		<li>MVC, Service Abstraction und Dependency Injection verwenden</li>
 	</ul>
 </section><section>
-	<section>
-		<p><h3>Angular macht HTML erweiterbar</h3></p>
-		<h4>Ist das cool?</h4> 
-		<div class="switch">
-			<input ng-model="ShowFaveNumbers" type="checkbox">
-			<label><i></i></label>
+	<h3>Einstieg in Angular</h3>
+	<p>
+		<div class="span4 thumbnail">
+			<h4>MVC</h4>
 		</div>
-		<p ng-show="ShowFaveNumbers">
-		    <b>Auf jeden Fall!</b>
-		</p>
-	</section>
-	<section>
-		<p><h3>Angular macht HTML erweiterbar (JQuery Code)</h3></p>
-		<pre>
-		<code>
-Show Favorite Numbers: &lt;input id="ShowFaveNumbers" type="checkbox"&gt;
-&lt;b id="FaveNumbers"&gt; Auf jeden Fall!&lt;/b&gt;
-		</code>
-		</pre>
-		<pre>
-		<code>
-$(function() {
-        function showOrHide() {
-            var isChecked = $('#ShowFaveNumbers').is(':checked');
-            
-            // imperative Code dependency
-            var fn = $('#FaveNumbers');
-            if (isChecked)
-                fn.show();
-            else
-                fn.hide();
-        }
-        $('#ShowFaveNumbers').change(function() {
-            showOrHide();
-        });
-        showOrHide();
-});
-		</code>
-		</pre>
-	</section>
-	<section>
-		<p><h3>Angular macht HTML erweiterbar (Angular Code)</h3></p>
-		<pre>
-		<code>
-Show Favorite Numbers: &lt;input ng-model="ShowFaveNumbers" type="checkbox"&gt;
-&lt;b ng-show="ShowFaveNumbers"&gt; Auf jeden Fall!&lt;/b&gt;
-		</code>
-		</pre>
-	</section>
-</section>
-<section>
-	<p><h3>Angular bietet ein two-way binding</h3></p>
-	<h4>Ist das auch cool?</h4> 
-	<div class="switch">
-		<input ng-model="ShowFaveNumbers" type="checkbox">
-		<label><i></i></label>
-	</div>
-	<p ng-show="ShowFaveNumbers">
-	    <b>Aber sowas von!</b>
+		<div class="span4 thumbnail">
+			<h4>HTML als DSL</h4>
+		</div>
+		<div class="span4 thumbnail">
+			<h4>Data Binding</h4>
+		</div>			
 	</p>
 </section>
 <section>
-	<li>Und wenn auch noch ein MVC Framework ist?</li>
-	<pre><code>
-&lt;input type="text" ng-model="model"&gt;
-Das Coden {{emphaticModel}}
-&lt;script&gt;
-	myController function($scope){
-	$scope.model = "kann beginnen";
-	$scope.emphaticModel = $scope.model + "!!!";
-	}
-&lt;/script&gt;
-	</code></pre>
-	<input type="text" ng-model="model">
-	Das Coden {{emphaticModel}}
-</section>
-<section>
-	<blockquote>Angular is what the web browser would have been, had it been designed for applications.</blockquote>
-	<p>Misko Hevery (Creator of AngularJS)</p>
-</section><section>
-	<h2>Warum AngularJS?</h2>
-	<ul>
-		<li>Nach initialer Einarbeitung beschleunigt AngularJS die Appentwicklung rasant</li>
-		<ul>
-			<li>Eigene HTML Tags sorgen für leichte Wiederverwendbarkeit von Code </li>
-			<li>Vom Framework und Extensions bereitgestellte HTML Tags decken viele Use Cases ab</li>
-			<li>AngularJS ist leicht testbar</li>
-		</ul>
-		<li>AngularJS bietet eine klare Unterteilung der Anwendung nach dem MVC Pattern</li>
-		<li>Umfangreiche Doku und guter Support</li>
-		<li>Einfache Integration mit Javascript Bibliotheken</li>
-	</ul>
-</section>
-<section>
-	<h2>Angular auf einen Blick</h2>
-	<ol>
-		<li>Dependency Injection</li>
-		<li>Service Abstraction</li>
-		<li>Directives</li>
-		<li>Expressions</li>
-		<li>Forms (validation)</li>
-		<li><a href="http://angularjs.de/artikel/angularjs-i18n-ng-translate"></a>i18n</a></li>
-		<li>Modules</li>
-		<li>Filters</li>
-		<li>REST Client</li>
-	</ol>
-</section>
-<!--section>
-
-	<h2>Interesse an Angular</h2>
-	<p><script type="text/html" src="http://www.google.de/trends/embed.js?hl=de&q=angularjs+%2B+angular.js,+emberjs+%2B+ember.js,+backbonejs+%2B+backbone.js,+knockoutjs+%2B+knockout.jsr&date=1/2011+33m&cmpt=q&content=1&cid=TIMESERIES_GRAPH_0&export=5&w=800&h=600"></script></p>
-</section-->
-                <section>
 	<section>
-		<h3>Wie binde ich AngularJS ein?</h3>
-		<pre>
-		<code>
-&lt;body ng-app&gt;
-	&lt;input type="text" ng-model="model"&gt;
-	Das Coden {{emphaticModel}}
-	<!-- Wenn jQuery für Plugins benötigt wird, vor Angular laden -->
-	&lt;script src="jquery.min.js"&gt;&lt;/script&gt;
-	<!-- Angular hat keine Externen Abhängigkeiten -->
-	&lt;script src="angular.min.js"&gt;&lt;/script&gt;
-	&lt;script&gt;
-		myController function($scope){
-		$scope.model = "kann beginnen";
-		$scope.emphaticModel = $scope.model + "!!!";
-		}
-	&lt;/script&gt;
-&lt;/body&gt;
-		</code>
-		</pre>
+	 	<h3>MVC - Aufbau einer AngularJS Anwendung</h3>
+		<script>
+		angular.module('Einstieg', []).controller('einController', function ($scope) {
+			$scope.model = "kann beginnen!";
+		});
+		</script>
+		<div ng-controller="einController">
+			<input type="text" ng-model="model" style="border">
+			<br>
+			<h3> Das Coden {{model  + '!'}} </h3>
+		</div>
 	</section>
 	<section>
-		<h3>Wie erstelle ich einen eigenen HTML Tag?</h3> 
-		<div class="switch">
-			<input ng-model="showMe" type="checkbox">
-			<label><i></i></label>
+		<h3>Einstieg in Angular</h3>
+	<div style="float: left;">
+		<p>HTML</p>
+		<pre><code ng-non-bindable>
+&lt;head&gt;
+&lt;script src="angular.min.js"&gt;
+&lt;/script&gt;
+&lt;script&gt;
+&lt;!-- Controller --&gt;
+function aController($scope){
+&lt;!-- Model --&gt;
+$scope.einModel = "kann beginnen";
+}
+&lt;/script&gt;
+&lt;/head&gt;
+		</code></pre>
 		</div>
-		<div ng-show="showMe">
-		<pre><code>
-		&lt;h3&gt;Wie erstelle ich einen eigenen Tag?&lt;/h3&gt; 
-		&lt;div class="switch"&gt;
-			&lt;input ng-model="showMe" type="checkbox"&gt;
-			&lt;label&gt;&lt;i&gt;&lt;/i&gt;&lt;/label&gt;
-		&lt;/div&gt;
-		&lt;div ng-show="showMe"&gt;
-		    &lt;pre&gt;&lt;code&gt;/*Dieses Snippet*/&lt;/code&gt;&lt;/pre&gt;
-		&lt;/div&gt;
+		<div style="float: right; width:">
+		<p>JS</p>
+		<pre><code ng-non-bindable>
+&lt;body ng-app&gt;
+&lt;!-- View--&gt;
+&lt;div ng-controller="einController"&gt;
+&lt;input type="text" 
+ng-model="einModel"&gt;
+Das Coden {{einModel + "!"}}
+&lt;/div&gt;
+&lt;/body&gt;
 		</code></pre>
 		</div>
 	</section>
 	<section>
-		<p><h3>ngShow ein neugeborenes HTML Element</h3><p/>
-		<pre>
-		<code>
-angular.directive('ngShow', [function () {
-	return {
-		restrict: 'A',
-		link: function (scope, element, attr) {
-			scope.$watch(attr.ngShow, function ngShowWatchAction(value){
-				element.css('display', toBoolean(value) ? '' : 'none');
-			});
-		}
-	};
-}]);
-		</code>
-		</pre>
+		<h2>{{features[1].headline}}</h2>
+		<div ng-repeat="img in features[1].img">
+			<a href="{{features[1].href}}"><img ng-src="{{img}}"/></a>
+		</div>		
+		<p>{{features[1].conclusion}}</p>
 	</section>
 </section>
-<!--section>
-		<h2>Angular befähigt den Browser neues HTML zu verstehen!</h2>
-		<p>
-			-> Funktionalität an Tag binden (Directives)
-			-> Funktionalität an beliebiger Stelle im HTML deklarieren!
+<section>
+	<section>
+		<h3>HTML als DSL - Angular macht HTML erweiterbar</h3>
+		<h4>Ist das gut?</h4> 
+			<input ng-model="zeigeText" type="checkbox">
+		<p ng-show="zeigeText">
+		    <b>Auf jeden Fall!</b>
+		<pre><code>
+Ist das cool? 
+&lt;input ng-model="zeigeText" type="checkbox"&gt;
+&lt;b ng-show="zeigeText"&gt; Auf jeden Fall!&lt;/b&gt;</code></pre>
 		</p>
-		<pre>						
-		<code>
-&lt;!doctype html&gt;
-&lt;html ng-app=&quot;optionalModuleName&quot;&gt;
-	&lt;body&gt;
-		&amp;lt;alert type="error"&amp;gt;Heyo!&amp;lt;/alert&amp;gt;
-		&lt;script src=&quot;angular.js&quot;&gt;&lt;/script&gt;
-	&lt;/body&gt;
-&lt;/html&gt;
-		</code>
-		</pre>
-</section-->
+	</section>
+	<section>
+		<h3>HTML als DSL - Alternative in JQuery</h3>
+		<pre><code>
+Ist das cool? 
+&lt;input id="zeigeText" type="checkbox"&gt;
+&lt;b id="einText"&gt; Auf jeden Fall!&lt;/b&gt;</code></pre>
+		<pre><code>$(function() {
+    function showOrHide() {
+        var isChecked = $('#zeigeText').is(':checked');
+        
+        // imperative Code dependency
+        var fn = $('#einText');
+        if (isChecked)
+            fn.show();
+        else
+            fn.hide();
+    }
+    $('#zeigeText').change(function() {
+        showOrHide();
+    });
+    showOrHide();
+});</code></pre>
+	</section>
+	<section>
+		<h2>HTML als DSL - {{features[0].headline}}</h2>
+		<div ng-repeat="img in features[0].img">
+			<a href="{{features[0].href}}"><img ng-src="{{img}}"/></a>
+		</div>		
+		<p>{{features[0].conclusion}}</p>
+	</section>
+</section>
+<section>
+	<section>
+	<h3>Data Bindung - Bietet Angular ein Two-Way Binding?</h3>
+	<input ng-model="zeigeText" type="checkbox">
+	    <p><b>Die vorangehende Checkbox 
+	    <span ng-show="zeigeText">sagt ja!</span>
+	    <span ng-hide="zeigeText">anklicken ;)</span>
+	    </b></p>
+	</section>
+	<section>
+		<h2>Data Bindung - {{features[2].headline}}</h2>
+		<div ng-repeat="img in features[2].img">
+			<a href="{{features[2].href}}"><img ng-src="{{img}}" style="margin: -5px;"/></a>
+		</div>		
+		<p>{{features[2].conclusion}}</p>
+	</section>
+	<!--section>
+		<h2>Die Theorie zu den Features {{object}}</h2>
+			<ul>
+				<li ng-repeat="feature in features" 
+                class="highlight-blue">
+                {{feature.headline}}!
+				</li>
+			</ul>
+		<aside class="notes">
+			Zusatzinfos
+		</aside>
+	</section>
+	<section ng-repeat="feature in features">
+		<h2>{{feature.headline}}</h2>
+		<div ng-repeat="img in feature.img">
+			<a ng-href="{{href}}"><img ng-src="{{img}}"/></a>
+		</div>		
+		<p>{{feature.conclusion}}</p>
+	</section-->
+</section>
+
+<section>
+	<h3>Tieferer Einblick in Angular</h3>
+	<p>
+		<div class="span4 thumbnail">
+			<h4>Directives</h4>
+		</div>
+		<div class="span4 thumbnail">
+			<h4>Services</h4>
+		</div>
+		<div class="span4 thumbnail">
+			<h4>Module</h4>
+		</div>			
+	</p>
+</section>
+<section>
+	<section>
+		<h3>Services - Services in Angular</h3>
+		<script>
+		angular.module('Vortsetzung', []).controller('einServiceController', function ($scope, coderService) {
+			$scope.$watch("myModel", function watchModel(value) {
+				$scope.myOtherModel =  coderService.concat(value);
+			})
+		}).service('coderService', function(){
+			    this.concat= function(text){
+			        return "Das Coden kann " + text;
+			    }; 
+			});
+		</script>
+		<div ng-controller="einServiceController">
+			<input type="text" ng-model="myModel" style="border" value="weitergehen">
+			<br>
+			<h3> {{myOtherModel}} </h3>
+		</div>
+	</section>
+	<section>
+		<h3>Services - Wie erstelle und verwende ich einen Service?</h3> 
+		<pre><code>
+&lt;script&gt;
+angular
+.controller('einServiceController', function ($scope, coderService) {
+	$scope.myModel = "weitergehen";
+	$scope.$watch("myModel", function watchModel(value) {
+		$scope.myOtherModel =  coderService.concat(value);
+	})
+}).service('coderService', function(){
+    this.concat= function(text){
+        return "Das Coden kann " + text + "!";
+    }; 
+});
+&lt;/script&gt;
+&lt;div ng-controller="einServiceController"&gt;
+	&lt;input type="text" ng-model="myModel" style="border"&gt;
+	&lt;br&gt;
+	&lt;h3&gt; {{myOtherModel}} &lt;/h3&gt;
+&lt;/div&gt;
+		</code></pre>
+	</section>
+</section>
+<section>
+	<section>
+		<script>
+		angular.module('myUiDirectives', []).directive('myShow', function () {
+		return {
+		 restrict: 'A',
+		 link: function (scope, element, attr) {
+		    scope.$watch(attr.myShow, function(val){
+		    element.css('display', val ? '' : 'none');
+		  });
+		 }
+		};
+		});
+		</script>
+		<h3>Directives - Wie erstelle ich einen eigenen HTML Tag?</h3> 
+		<div class="switch">
+			<input ng-model="showMe" type="checkbox">
+			<label><i></i></label>
+		</div>
+		<div my-show="showMe">
+		<pre><code>
+&lt;h3&gt;Wie erstelle ich einen eigenen Tag?&lt;/h3&gt; 
+&lt;div class="switch"&gt;
+	&lt;input ng-model="showMe" type="checkbox"&gt;
+	&lt;label&gt;&lt;i&gt;&lt;/i&gt;&lt;/label&gt;
+&lt;/div&gt;
+&lt;div my-show="showMe"&gt;
+    &lt;pre&gt;&lt;code&gt;/*Dieses Snippet*/&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+		</code></pre>
+		</div>
+	</section>
+	<section>
+		<h3>Directives - ngShow ein neugeborenes HTML Element</h3>
+		<pre><code>
+angular.directive('myShow', function () {
+return {
+ restrict: 'A',
+ link: function (scope, element, attr) {
+    scope.$watch(attr.myShow, function(val){
+    element.css('display', val ? '' : 'none');
+  });
+ }
+};
+});</code></pre>
+	</section>
+</section>
+<section>
+		<h3>Module - Kapseln von Anwendungslogik im JS</h3>
+		<pre><code>
+&lt;body ng-app="myApp"&gt;
+....
+&lt;/body&gt;
+
+&lt;script&gt;
+angular.module('myApp', ['graphics'])
+.controller('einController', function ($scope) {...})
+.service('coderService', function(){...})
+.directive('directiveX', function () {...});
+&lt;/script&gt;
+
+&lt;script&gt;
+angular.module('graphics', [])
+.service('shapeConverter', function(){...})
+.factory('shape', function(){...})
+.directive('sqareCanvas', function('shapeConverter'){...});
+&lt;/script&gt;
+		</code></pre>
+</section>
+<section>
+	<blockquote>Angular is what the web browser would have been, had it been designed for applications.</blockquote>
+	<p>Misko Hevery (Creator of AngularJS)</p>
+</section>
+                <section>
+	<h2>Angular Komponenten / Extensions</h2>
+	<ol>
+		<li>Templating und Routing</li>
+		<li>UIs und Validierung</li>
+		<li><a href="http://angularjs.de/artikel/angularjs-i18n-ng-translate">Internatisierung</a></li>
+		<li>REST Client</li>
+		<li>Viiiele weitere Features</li>
+	</ol>
+</section>
+<section>
+	<h2 style="margin-top: -200px;">Warum AngularJS?</h2>
+	<section><h4>Erweitertes HTML <b>=</b> höheres Abstraktionslevel  <b>=</b> viele UseCases abgedeckt</h4></section>
+	<section><h4>Diectives <b>=</b> gekapselte DOM Manipulation <b>=</b> Integration mit jQuery u.ä.</h4></section>
+	<section><h4>Controller <b>+</b> Model mit Scope <b>+</b> Template oder HTML <b>=</b> MVC </h4></section> 
+	<section><h4>Services, Module <b>+</b> Dependancy Injection <b>=</b> Wartbarkeit, Testbarkeit </h4></section>
+	<section><h4>Filter <b>=</b> Format Expressions <b>=</b> Internationalisierung, Validierung... </h4></section>
+	<section><h4>Doku <b>+</b> Community <b>=</b> guter Support, geniale Extensions </h4></section>
+</section>
 <section>
 	<blockquote>Pretty sure that HTML6 is going under the codename @angularjs!</blockquote>
 	<p>Some tweet at Twitter</p>
@@ -534,76 +677,69 @@ angular.directive('ngShow', [function () {
                 <section>
 					<h2>PhoneGap</h2>
                     <ul>
+                    	<li>Seit 2011 Apache Cordova</li>
 						<li>Open-Source-Framework</li>
-						<li>Apps für <a href="http://docs.phonegap.com/en/edge/guide_overview_index.md.html#Overview">zehn verschiedene Plattformen</a> entwickeln (iOS, Android, Blackberry…)</li>
-						<li>Bietet Schnittstellen für Geräte-Hardware wie Kamera oder GPS</li>
+						<li>Apps für <a href="http://phonegap.com/about/feature">sieben verschiedene mobile Plattformen</a> entwickeln (iOS, Android, Blackberry…)</li>
+						<li>Bietet Schnittstellen für Geräte-Hardware</li>
 					</ul>
                     
                     <aside class="notes">
                     Open-Source-Framework PhoneGap 
-lassen sich Apps für sieben verschiedene mobile Betriebssysteme entwickeln: iOS, Android, Blackberry, Windows Phone, Palm WebOS, Bada und Symbian. 
+lassen sich Apps für zehn verschiedene Betriebssysteme entwickeln: iOS, Android, Blackberry, Windows Phone, Palm WebOS, Bada und Symbian. 
 Entwickler schreibt den gesamten Code in HTML, CSS und JavaScript. 
 PhoneGap bietet zusätzliche Schnittstellen, um Geräte-Hardware wie Kameras oder Beschleunigungssensoren einzubinden.
 Der Zugriff erfolgt dabei durch JavaScript
 Anschließend kompiliert es alles und stellt Installationsdateien für die verschiedenen Systeme bereit.
 
-2011 von Adobi Systems übernommen seitdem heißt es Apache Cordova
+ürsprünglich von der Firma Nitobi entwickelt
+2011 von Adobe Systems übernommen an Apache Software Fondation übergeben seitdem heißt es Apache Cordova
 
                     </aside>
 				</section>
 
 				<section>
 					<h2>PhoneGap einrichten</h2>
-					<ul>
-						<li>Über die Komandozeile (<a href="http://nodejs.org/">NodeJS</a> vorausgesetzt):</li>
-					</ul>
-					   <pre><code contenteditable>
+                    <p>Über die Komandozeile (<a href="http://nodejs.org/">NodeJS</a> vorausgesetzt):</p>
+					   <pre><code>
                         npm install -g phonegap
                             </code></pre>
-					<ul>
-						<li>Manuell über die <a href="http://phonegap.com/install/">PhoneGap-Plattform</a></li>
-					</ul>
+                    <p>Manuell über die <a href="http://phonegap.com/install/">PhoneGap-Plattform</a></p>
 				</section>
                 <section>
                     <section>
                         <h2>PhoneGap benutzen</h2>
-                        <ul>
-                            <li>Anlegen eines neuen Projektes:</li>
-                        </ul>
-                           <pre><code contenteditable>
-            phonegap create meineErsteApp --name "meineErsteApp" 
-            --id "de.mms.meineErsteApp"
+                            <p>Anlegen eines neuen Projektes:</p>
+                        <pre><code>
+                        phonegap create Phonecat 
                                 </code></pre>
-                        <ul> 
-                            <li>Umwandlung der Web-App für die jeweilige Plattform:</li>
-                        </ul>
-                        <pre><code contenteditable>
-                            phonegap run android
+                        <p>Umwandlung der Web-App für die jeweilige Plattform:</p>
+                        <pre><code>
+                        phonegap run android
                         </code></pre>
                     </section>
                     
                     <section>
+                        <h2>Einbinden von PhoneGap</h2>
+                        <p>Ab der Version PhoneGap 3.0:</p>
+                        <pre><code>
+                &lt;script type="text/javascript" charset="utf-8"
+                src="phonegap.js"&gt; &lt;/script&gt;
+                     </code></pre>
+                     <p>Vor der Version PhoneGap 3.0:</p>
+                    <pre><code>
+                &lt;script type="text/javascript" charset="utf-8" 
+                src="cordova-2.9.0.js"&gt; &lt;/script&gt;
+                     </code></pre>
+                    </section>
+
+                    <section>
                         <h2>Beispiel Anwendung</h2>
-                        <pre><code contenteditable>
+                        <pre><code>
 &lt;head&gt;
 &lt;title&gt;Gerätedaten-Beispiel&lt;/title&gt;
 &lt;script type="text/javascript" charset="utf-8"
 src="phonegap.js"&gt; &lt;/script&gt;
-&lt;script type="text/javascript" charset="utf-8"&gt;
-    // Warten auf Cordova
-    document.addEventListener("deviceready", onDeviceReady, false);
-	                            
-    // Cordova ist geladen.
-    function onDeviceReady() {
-        var element = document.getElementById('deviceProperties');
-	                            
-        element.innerHTML = 'Device Name: ' + device.name + '&lt;br /&gt;' +
-        'Device Cordova: ' + device.cordova + '&lt;br /&gt;' +
-        'Device Platform: ' + device.platform + '&lt;br /&gt;' +
-        'Device UUID: ' + device.uuid + '&lt;br /&gt;' +
-        'Device Version: ' + device.version + '&lt;br /&gt;';
-}
-&lt;/script&gt; 
+&lt;script src="phonegapDevice.js"&gt; &lt;/script&gt;
 &lt;/head&gt;
 	                              
 &lt;body&gt;
@@ -611,25 +747,24 @@ src="phonegap.js"&gt; &lt;/script&gt;
 &lt;/body&gt;
                      </code></pre>
                     </section>
+<section>
+<h2>Beispiel Anwendung</h2>
+    <p>Code in phonegapDevice.js:</p>
+    <pre><code class="javascript">// Warten auf Cordova
+    document.addEventListener("deviceready", onDeviceReady, false);
+                                
+    // Cordova ist geladen.
+    function onDeviceReady() {
+        var element = document.getElementById('deviceProperties');
+                                
+        element.innerHTML = 'Device Name: ' + device.name + '&lt;br /&gt;' +
+        'Device Cordova: ' + device.cordova + '&lt;br /&gt;' +
+        'Device Platform: ' + device.platform + '&lt;br /&gt;' +
+        'Device UUID: ' + device.uuid + '&lt;br /&gt;' +
+        'Device Version: ' + device.version + '&lt;br /&gt;';
+}</code></pre>
+</section>
                     
-                    <section>
-                        <h2>Einbinden von PhoneGap</h2>
-                        <ul>
-                            <li>Ab der Version PhoneGap 3.0:</li>
-                        </ul>
-                        <pre><code contenteditable>
-                &lt;script type="text/javascript" charset="utf-8"
-                src="phonegap.js"&gt; &lt;/script&gt;
-                     </code></pre>
-                        <ul>
-                            <li>Vor der Version PhoneGap 3.0:</li>
-                        </ul>
-                    <pre><code contenteditable>
-                &lt;script type="text/javascript" charset="utf-8" 
-                src="cordova-2.9.0.js"&gt; &lt;/script&gt;
-                     </code></pre>
-                    </section>
-
                     <section>
                     <h2>Ausgabe von Beispielanwendung</h2>
                     	<img style="width:800px;" ng-src="img/ausgabe.png"/>
@@ -640,7 +775,7 @@ src="phonegap.js"&gt; &lt;/script&gt;
 					<h2>PhoneGap Anwendung konfigurieren</h2>
 					    <ul>
                             <li>Mit Hilfe einer config.xml Datei können: Name, Kodierung, Rechte, Icons etc. spezifiziert werden</li>
-                            <li>Dafür muss sich config.xml im Rootverzeichnis befinden</li>
+                            <li>Dafür muss sich die Konfigurationsdatei im Rootverzeichnis befinden</li>
                         </ul>
 				</section>
 				<section> 
@@ -649,20 +784,20 @@ src="phonegap.js"&gt; &lt;/script&gt;
 &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
     &lt;widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "de.mms.mobileBeispiel" 
+        id        = "de.mms.phoneGapBeipiel" 
         versionCode = "10" 
         version   = "1.0.0"&gt;
 
     &lt;!-- Versionscode ist nur für iOS und Android --&gt;
 
-    &lt;name>PhoneGap Beispiel&lt;/name&gt;
+    &lt;name>Phonecat&lt;/name&gt;
 
     &lt;description>
-        Eine Beipielandwenung für die DLC 2013. 
+        Eine Beispielandwenung für den DLC 2013. 
     &lt;/description&gt;
 
     &lt;author href="http://beispiel.de" email="ivan.demin@t-systems.de"&gt;
-        Ivan Demin 
+        Ivan Demin & Sergej Kasper
     &lt;/author&gt;
 
 &lt;/widget&gt;</code></pre>
@@ -675,6 +810,7 @@ werden, dann kann die folgende Zeile angebeben werden: -->
 &lt;preference name="permissions" value="none"/&gt;
 
 <!-- individuelle Vergabe von Rechten -->
+&lt;feature name="http://api.phonegap.com/1.0/device" /&gt;
 &lt;feature name="http://api.phonegap.com/1.0/battery"/&gt;
 &lt;feature name="http://api.phonegap.com/1.0/camera"/&gt;
 &lt;feature name="http://api.phonegap.com/1.0/contacts"/&gt;
@@ -688,9 +824,7 @@ werden, dann kann die folgende Zeile angebeben werden: -->
 				    </section>
 				<section> 
 					<h2>Access Element</h2>
-<ul>
-     <li>Erlaubt den Zugriff auf Ressourcen anderer Domains</li>
-</ul>
+<p>Erlaubt den Zugriff auf Ressourcen anderer Domains</p>
 <pre><code>&lt;!-- erlaubt lokale Seiten --&gt;
 &lt;access origin="http://127.0.0.1*"/&gt; 
 &lt;!-- individueller Zugriff --&gt;
@@ -703,15 +837,15 @@ werden, dann kann die folgende Zeile angebeben werden: -->
                 <section>
                     <h2>PhoneGap Plugins</h2>
                     <ul>
-                        <li><a href="http://github.com/phonegap-build/BarcodeScanner.git">Barcode Scanner<img src="img/barcode.jpg" height="50" width="50"></a></li>
-                        <li><a href="https://github.com/chariotsolutions/phonegap-nfc.git">NFC <img src="img/nfc.jpg" height="50" width="50"></a></li>
-                        <li><a href="https://github.com/shaders/pushwoosh-phonegap-build-plugin">Notification<img src="img/notification.jpg" height="50" width="50"></a></li>
+                        <li><a href="http://github.com/phonegap-build/BarcodeScanner.git">Barcode Scanner</a></li>
+                        <li><a href="https://github.com/chariotsolutions/phonegap-nfc.git">NFC</a></li>
+                        <li><a href="https://github.com/shaders/pushwoosh-phonegap-build-plugin">Push Notification</a></li>
                     </ul>
                 </section>
 				<section>
 				<section>
 					<h2>Ripple Emulator</h2>
-					<img src="img/rippleEmulator.png"> 
+					<a href=""><img src="img/rippleEmulator.png"></a> 
 				</section>
 				<section>
 					<h2>Ripple Emulator</h2>
@@ -719,7 +853,7 @@ werden, dann kann die folgende Zeile angebeben werden: -->
 						<li><a href="https://chrome.google.com/webstore/search/ripple%20emulator?hl=de&utm_source=chrome-ntp-launcher">Google Chrome Erweiterung</a></li>
 						<li>Emuliert mobile Umgebungen</li>
 						<li>Erleichtert die Entwicklung und Testung von Web/Hybrid-Apps geeignet</li>
-                        <li>PhoneGap integriert</li>
+                        <li>Apache Cordova/PhoneGap integriert</li>
 					</ul>
                     
                 <aside class="notes">
@@ -749,6 +883,11 @@ PhoneGap ist in dem Emulator integriert kann so kann simuliert werden wie PhoneG
 
 				</section>
 <section>
+	<h2>Fazit</h2>
+
+</section>
+
+<section>
 	<h2>Weiterführende Literatur</h2>
     <a href="http://www.amazon.de/gp/product/383622237X/ref=as_li_tf_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=383622237X&linkCode=as2&tag=wwwprepaiderd-21"><img height="650" width="450" src="img/appsHTML5.png"></a>
 	<a href="http://www.amazon.de/gp/product/3446435107/ref=as_li_tf_il?ie=UTF8&camp=1638&creative=6742&creativeASIN=3446435107&linkCode=as2&tag=wwwprepaiderd-21"><img height="650" width="450" src="img/phoneGapBuch.jpg" /></a> 
@@ -757,6 +896,10 @@ PhoneGap ist in dem Emulator integriert kann so kann simuliert werden wie PhoneG
 <section>
 	<h2>Weiterführende Links</h2>
 	<ul>
+		<li><a href="http://angularjs.org/">AngularJS</a></li>
+		<li><a href="http://phonegap.com/install/">PhoneGap</a></li>
+		<li><a href="https://chrome.google.com/webstore/search/ripple%20emulator?hl=de&utm_source=chrome-ntp-launcher">Ripple Emulator</a></li>
+		<li><a href="https://build.phonegap.com/">PhoneGap Build</a></li>
 		<li><a href="http://www.heise.de/developer/artikel/Cross-Plattform-Apps-mit-PhoneGap-entwickeln-1934535.html">PhoneGap Tutorial</a></li>
 		<li><a href="http://docs.angularjs.org/tutorial">AngularJS Tutorial</a></li>
 	</ul>

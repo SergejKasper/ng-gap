@@ -34,7 +34,7 @@
 	<script src="js/reveal.min.js"></script>
 	<script src="js/ng-google-chart.js"></script>
 	<script>
-	angular.module('revealAngular', ['Einstieg','googlechart', 'Vortsetzung'])
+	angular.module('revealAngular', ['Einstieg','googlechart', 'Vortsetzung', 'myUiDirectives'])
 		.controller('ChartCtrl', ['$scope', function ($scope) {
 			$scope.chart = {
   "type": "ColumnChart",
@@ -61,7 +61,7 @@
           },
           {
             "v": 900000,
-            "f": "900000"
+            "f": "Anzahl"
           }
         ]
       },
@@ -72,7 +72,7 @@
           },
           {
             "v": 850000,
-            "f": "850000"
+            "f": "Anzahl"
           }
         ]
       },      
@@ -83,7 +83,7 @@
           },
           {
             "v": 145000,
-            "f": "145000"
+            "f": "Anzahl"
           }
         ]
       },
@@ -94,7 +94,7 @@
           },
           {
             "v": 120000,
-            "f": "120000"
+            "f": "Anzahl"
           }
         ]
       }

@@ -12,27 +12,22 @@
 
 
 // Include theme-specific fonts
-@import url(http://fonts.googleapis.com/css?family=Montserrat:700);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro);
+@import url(http://fonts.googleapis.com/css?family=Fjalla+One);
 
 
 // Override theme settings (see ../template/settings.scss)
 $backgroundColor: white;
 
-$mainFont: 'Open Sans', Times, 'Times New Roman', serif;
+$mainFont: 'Source Sans Pro', sans-serif;
 $linkColor: #E20076;
 $linkColorHover: lighten( $linkColor, 20% );
-$headingFont: 'Montserrat', Impact, sans-serif;
+$headingFont: 'Fjalla One', sans-serif;
 $headingTextShadow: none;
 $headingLetterSpacing: -0.03em;
 $headingTextTransform: none;
 $selectionBackgroundColor: #E20076;
 $mainFontSize: 30px;
-
-
-// Theme template ------------------------------
-@import "../template/theme";
-// ---------------------------------------------
 
 /** CUSTOM  **/
 
@@ -65,7 +60,7 @@ background: rgba( 0,0,0,.7 );
 bottom: 0px;
 position: fixed;
 left: 20px;
-width: 90%;
+width: 95%;
 }
 
 .reveal blockquote {
@@ -82,3 +77,39 @@ height: 50px;
 input[type="checkbox"]:checked{
 background-color: #E20076;
 }
+
+.reveal pre{
+	box-shadow: none;
+	border: none;
+}
+
+.reveal code{
+	border-radius: 5px;
+}
+.reveal .thumbnail {
+	border-radius: 5px;
+	border: 1px;
+	@include radial-gradient( rgba(247,242,211,1), rgba(255,255,255,1) );
+}
+.thumbnail3{
+	width: 33%;
+}
+.thumbnail2{
+	width: 50%;
+}
+.thumbnail4{
+	width: 25%;
+}
+
+pre code{
+	padding: 25px;
+	width: 100%;
+} 
+// Background generator
+@mixin bodyBackground() {
+	@include radial-gradient( rgba(231,206,23, 0.2), rgba(255,255,255,1) );
+}
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------

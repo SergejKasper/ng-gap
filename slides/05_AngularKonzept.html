@@ -1,81 +1,149 @@
 <section>
-	<section>
-		<p><h3>Angular macht HTML erweiterbar</h3></p>
-		<h4>Ist das cool?</h4> 
-		<div class="switch">
-			<input ng-model="ShowFaveNumbers" type="checkbox">
-			<label><i></i></label>
+	<h3>Einstieg in Angular</h3>
+	<p>
+		<div class="span4 thumbnail">
+			<h4>MVC</h4>
 		</div>
-		<p ng-show="ShowFaveNumbers">
-		    <b>Auf jeden Fall!</b>
-		</p>
-	</section>
-	<section>
-		<p><h3>Angular macht HTML erweiterbar (JQuery Code)</h3></p>
-		<pre>
-		<code>
-Show Favorite Numbers: &lt;input id="ShowFaveNumbers" type="checkbox"&gt;
-&lt;b id="FaveNumbers"&gt; Auf jeden Fall!&lt;/b&gt;
-		</code>
-		</pre>
-		<pre>
-		<code>
-$(function() {
-        function showOrHide() {
-            var isChecked = $('#ShowFaveNumbers').is(':checked');
-            
-            // imperative Code dependency
-            var fn = $('#FaveNumbers');
-            if (isChecked)
-                fn.show();
-            else
-                fn.hide();
-        }
-        $('#ShowFaveNumbers').change(function() {
-            showOrHide();
-        });
-        showOrHide();
-});
-		</code>
-		</pre>
-	</section>
-	<section>
-		<p><h3>Angular macht HTML erweiterbar (Angular Code)</h3></p>
-		<pre>
-		<code>
-Show Favorite Numbers: &lt;input ng-model="ShowFaveNumbers" type="checkbox"&gt;
-&lt;b ng-show="ShowFaveNumbers"&gt; Auf jeden Fall!&lt;/b&gt;
-		</code>
-		</pre>
-	</section>
-</section>
-<section>
-	<p><h3>Angular bietet ein two-way binding</h3></p>
-	<h4>Ist das auch cool?</h4> 
-	<div class="switch">
-		<input ng-model="ShowFaveNumbers" type="checkbox">
-		<label><i></i></label>
-	</div>
-	<p ng-show="ShowFaveNumbers">
-	    <b>Aber sowas von!</b>
+		<div class="span4 thumbnail">
+			<h4>HTML als DSL</h4>
+		</div>
+		<div class="span4 thumbnail">
+			<h4>Data Binding</h4>
+		</div>			
 	</p>
 </section>
 <section>
-	<li>Und wenn auch noch ein MVC Framework ist?</li>
-	<pre><code>
-&lt;input type="text" ng-model="model"&gt;
-Das Coden {{emphaticModel}}
-&lt;script&gt;
-	myController function($scope){
-	$scope.model = "kann beginnen";
-	$scope.emphaticModel = $scope.model + "!!!";
-	}
+	<section>
+	 	<h3>MVC - Aufbau einer AngularJS Anwendung</h3>
+		<script>
+		angular.module('Einstieg', []).controller('einController', function ($scope) {
+			$scope.model = "kann beginnen!";
+		});
+		</script>
+		<div ng-controller="einController">
+			<input type="text" ng-model="model" style="border">
+			<br>
+			<h3> Das Coden {{model  + '!'}} </h3>
+		</div>
+	</section>
+	<section>
+		<h3>Einstieg in Angular</h3>
+	<div style="float: left;">
+		<p>HTML</p>
+		<pre><code ng-non-bindable>
+&lt;head&gt;
+&lt;script src="angular.min.js"&gt;
 &lt;/script&gt;
-	</code></pre>
-	<input type="text" ng-model="model">
-	Das Coden {{emphaticModel}}
+&lt;script&gt;
+&lt;!-- Controller --&gt;
+function aController($scope){
+&lt;!-- Model --&gt;
+$scope.einModel = "kann beginnen";
+}
+&lt;/script&gt;
+&lt;/head&gt;
+		</code></pre>
+		</div>
+		<div style="float: right; width:">
+		<p>JS</p>
+		<pre><code ng-non-bindable>
+&lt;body ng-app&gt;
+&lt;!-- View--&gt;
+&lt;div ng-controller="einController"&gt;
+&lt;input type="text" 
+ng-model="einModel"&gt;
+Das Coden {{einModel + "!"}}
+&lt;/div&gt;
+&lt;/body&gt;
+		</code></pre>
+		</div>
+	</section>
+	<section>
+		<h2>{{features[1].headline}}</h2>
+		<div ng-repeat="img in features[1].img">
+			<a href="{{features[1].href}}"><img ng-src="{{img}}"/></a>
+		</div>		
+		<p>{{features[1].conclusion}}</p>
+	</section>
 </section>
 <section>
-	<blockquote>Angular is what the web browser would have been, had it been designed for applications.</blockquote>
-	<p>Misko Hevery (Creator of AngularJS)</p>
+	<section>
+		<h3>HTML als DSL - Angular macht HTML erweiterbar</h3>
+		<h4>Ist das gut?</h4> 
+			<input ng-model="zeigeText" type="checkbox">
+		<p ng-show="zeigeText">
+		    <b>Auf jeden Fall!</b>
+		<pre><code>
+Ist das cool? 
+&lt;input ng-model="zeigeText" type="checkbox"&gt;
+&lt;b ng-show="zeigeText"&gt; Auf jeden Fall!&lt;/b&gt;</code></pre>
+		</p>
+	</section>
+	<section>
+		<h3>HTML als DSL - Alternative in JQuery</h3>
+		<pre><code>
+Ist das cool? 
+&lt;input id="zeigeText" type="checkbox"&gt;
+&lt;b id="einText"&gt; Auf jeden Fall!&lt;/b&gt;</code></pre>
+		<pre><code>$(function() {
+    function showOrHide() {
+        var isChecked = $('#zeigeText').is(':checked');
+        
+        // imperative Code dependency
+        var fn = $('#einText');
+        if (isChecked)
+            fn.show();
+        else
+            fn.hide();
+    }
+    $('#zeigeText').change(function() {
+        showOrHide();
+    });
+    showOrHide();
+});</code></pre>
+	</section>
+	<section>
+		<h2>HTML als DSL - {{features[0].headline}}</h2>
+		<div ng-repeat="img in features[0].img">
+			<a href="{{features[0].href}}"><img ng-src="{{img}}"/></a>
+		</div>		
+		<p>{{features[0].conclusion}}</p>
+	</section>
 </section>
+<section>
+	<section>
+	<h3>Data Bindung - Bietet Angular ein Two-Way Binding?</h3>
+	<input ng-model="zeigeText" type="checkbox">
+	    <p><b>Die vorangehende Checkbox 
+	    <span ng-show="zeigeText">sagt ja!</span>
+	    <span ng-hide="zeigeText">anklicken ;)</span>
+	    </b></p>
+	</section>
+	<section>
+		<h2>Data Bindung - {{features[2].headline}}</h2>
+		<div ng-repeat="img in features[2].img">
+			<a href="{{features[2].href}}"><img ng-src="{{img}}" style="margin: -5px;"/></a>
+		</div>		
+		<p>{{features[2].conclusion}}</p>
+	</section>
+	<!--section>
+		<h2>Die Theorie zu den Features {{object}}</h2>
+			<ul>
+				<li ng-repeat="feature in features" 
+                class="highlight-blue">
+                {{feature.headline}}!
+				</li>
+			</ul>
+		<aside class="notes">
+			Zusatzinfos
+		</aside>
+	</section>
+	<section ng-repeat="feature in features">
+		<h2>{{feature.headline}}</h2>
+		<div ng-repeat="img in feature.img">
+			<a ng-href="{{href}}"><img ng-src="{{img}}"/></a>
+		</div>		
+		<p>{{feature.conclusion}}</p>
+	</section-->
+</section>
+
