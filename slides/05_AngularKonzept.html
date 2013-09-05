@@ -29,31 +29,25 @@
 	<section>
 		<h3>Einstieg in Angular</h3>
 	<div style="float: left;">
-		<p>HTML</p>
-		<pre><code ng-non-bindable>
-&lt;head&gt;
+		<p>JS</p>
+		<pre style="width: 100%;"><code ng-non-bindable>
 &lt;script src="angular.min.js"&gt;
 &lt;/script&gt;
 &lt;script&gt;
-&lt;!-- Controller --&gt;
-function aController($scope){
-&lt;!-- Model --&gt;
-$scope.einModel = "kann beginnen";
-}
+ function aController($scope){
+  $scope.einModel = "kann beginnen";
+ }
 &lt;/script&gt;
-&lt;/head&gt;
 		</code></pre>
 		</div>
-		<div style="float: right; width:">
-		<p>JS</p>
-		<pre><code ng-non-bindable>
+		<div style="float: right;">
+		<p>HTML</p>
+		<pre style="width: 100%;"><code ng-non-bindable>
 &lt;body ng-app&gt;
-&lt;!-- View--&gt;
-&lt;div ng-controller="einController"&gt;
-&lt;input type="text" 
-ng-model="einModel"&gt;
-Das Coden {{einModel + "!"}}
-&lt;/div&gt;
+ &lt;div ng-controller="einController"&gt;
+ &lt;input type="text" ng-model="einModel"&gt;
+	Das Coden {{einModel + "!"}}
+ &lt;/div&gt;
 &lt;/body&gt;
 		</code></pre>
 		</div>
@@ -117,33 +111,19 @@ Ist das cool?
 	    <p><b>Die vorangehende Checkbox 
 	    <span ng-show="zeigeText">sagt ja!</span>
 	    <span ng-hide="zeigeText">anklicken ;)</span>
-	    </b></p>
+	    </b><pre><code>
+Die vorangehende Checkbox 
+&lt;span ng-show="zeigeText"&gt;sagt ja!&lt;/span&gt;
+&lt;span ng-hide="zeigeText"&gt;anklicken ;)&lt;/span&gt;
+	    </code></pre>
+	    <h5><a href="http://stackoverflow.com/questions/9682092/databinding-in-angularjs">2000 Livebindings pro page</a></h5>
+	    </p>
 	</section>
 	<section>
 		<h2>Data Bindung - {{features[2].headline}}</h2>
 		<div ng-repeat="img in features[2].img">
 			<a href="{{features[2].href}}"><img ng-src="{{img}}" style="margin: -5px;"/></a>
-		</div>		
+		</div>
 		<p>{{features[2].conclusion}}</p>
 	</section>
-	<!--section>
-		<h2>Die Theorie zu den Features {{object}}</h2>
-			<ul>
-				<li ng-repeat="feature in features" 
-                class="highlight-blue">
-                {{feature.headline}}!
-				</li>
-			</ul>
-		<aside class="notes">
-			Zusatzinfos
-		</aside>
-	</section>
-	<section ng-repeat="feature in features">
-		<h2>{{feature.headline}}</h2>
-		<div ng-repeat="img in feature.img">
-			<a ng-href="{{href}}"><img ng-src="{{img}}"/></a>
-		</div>		
-		<p>{{feature.conclusion}}</p>
-	</section-->
 </section>
-

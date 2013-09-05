@@ -33,8 +33,9 @@
 	<script src="lib/js/head.min.js"></script>
 	<script src="js/reveal.min.js"></script>
 	<script src="js/ng-google-chart.js"></script>
+	
 	<script>
-	angular.module('revealAngular', ['Einstieg','googlechart', 'Vortsetzung'])
+	angular.module('revealAngular', ['Einstieg','googlechart', 'Vortsetzung', 'myUiDirectives'])
 		.controller('ChartCtrl', ['$scope', function ($scope) {
 			$scope.chart = {
   "type": "ColumnChart",
@@ -249,10 +250,9 @@
 
 </aside>
 </section>
-
 <section>
-	<h2>Hybride App Architektur</h2>
-	<img style="width:800px;" ng-src="img/hybridApp.png"/>
+  <h2>Hybride App Architektur</h2>
+  <img style="width:800px;" ng-src="img/hybridApp.png"/>
     <aside class="notes">
     Mögliche hybride App Architektur mit Hilfe von PhoneGap
     PhoneGap ermöglich seine entwickelte Web-App in eine hybride App umzuwandeln
@@ -265,37 +265,20 @@
     Corona (http://www.coronalabs.com)
     Weitere: http://alternativeto.net/software/phonegap/
     </aside>
+</section><section>
+<img style="width: 100%;" src="img/AngularJS-large.png" alt="AngularJS Logo">
+	<p>JavaScript Framework für <a href="http://builtwith.angularjs.org/"> dynamische Websites, Webapps und hybride Apps</a></p>
 </section>
-<!--section>
-
+<section>
 	<h2>Interesse an Angular</h2>
 	<p><script type="text/html" src="http://www.google.de/trends/embed.js?hl=de&q=angularjs+%2B+angular.js,+emberjs+%2B+ember.js,+backbonejs+%2B+backbone.js,+knockoutjs+%2B+knockout.jsr&date=1/2011+33m&cmpt=q&content=1&cid=TIMESERIES_GRAPH_0&export=5&w=800&h=600"></script></p>
-</section-->
-<section>
-<img style="width: 100%;" src="img/AngularJS-large.png" alt="AngularJS Logo">
-<ul>
-	<li>Ein innovatives client-seitiges JavaScript Framework</li>
-	<li>Lauffähig auf allen modernen Mobile- und Desktopbrowsern </li>
-	<li>Eine gute Grundlage für intuitiv erweiterbare und wartbare Web-Frontends</li>
-</ul>
 </section>
-<section >
+<section>
 	<h2>Was ermöglicht Angular?</h2>
 	<ul>
 		<li>HTML für dynamische Views mit eigenen Tags erweitern</li>
-		<!--pre><code>
-		&lt;mytag ng-model="model"&gt;&lt;/mytag&gt;&lt;/code&gt;&lt;/pre&gt;
-		&lt;li&gt;MVC verwenden!&lt;/li&gt;
-		&lt;pre&gt;&lt;code&gt;
-		myController function($scope){
-		$scope.model = "genießen";
-		$scope.emphaticModel = $scope.model + "!!!";
-		}
-		...
-		&lt;p myattribute&gt; Angular {{emphaticModel}} &lt;/p&gt;
-		</code></pre-->
 		<li>Das Two-Way Binding nutzen<!--input type="text" ng-model="model"--></li>
-		<li>MVC, Service Abstraction und Dependency Injection verwenden</li>
+		<li>MVC, Services und Dependency Injection verwenden</li>
 	</ul>
 </section><section>
 	<h3>Einstieg in Angular</h3>
@@ -328,31 +311,25 @@
 	<section>
 		<h3>Einstieg in Angular</h3>
 	<div style="float: left;">
-		<p>HTML</p>
-		<pre><code ng-non-bindable>
-&lt;head&gt;
+		<p>JS</p>
+		<pre style="width: 100%;"><code ng-non-bindable>
 &lt;script src="angular.min.js"&gt;
 &lt;/script&gt;
 &lt;script&gt;
-&lt;!-- Controller --&gt;
-function aController($scope){
-&lt;!-- Model --&gt;
-$scope.einModel = "kann beginnen";
-}
+ function aController($scope){
+  $scope.einModel = "kann beginnen";
+ }
 &lt;/script&gt;
-&lt;/head&gt;
 		</code></pre>
 		</div>
-		<div style="float: right; width:">
-		<p>JS</p>
-		<pre><code ng-non-bindable>
+		<div style="float: right;">
+		<p>HTML</p>
+		<pre style="width: 100%;"><code ng-non-bindable>
 &lt;body ng-app&gt;
-&lt;!-- View--&gt;
-&lt;div ng-controller="einController"&gt;
-&lt;input type="text" 
-ng-model="einModel"&gt;
-Das Coden {{einModel + "!"}}
-&lt;/div&gt;
+ &lt;div ng-controller="einController"&gt;
+ &lt;input type="text" ng-model="einModel"&gt;
+	Das Coden {{einModel + "!"}}
+ &lt;/div&gt;
 &lt;/body&gt;
 		</code></pre>
 		</div>
@@ -416,37 +393,22 @@ Ist das cool?
 	    <p><b>Die vorangehende Checkbox 
 	    <span ng-show="zeigeText">sagt ja!</span>
 	    <span ng-hide="zeigeText">anklicken ;)</span>
-	    </b></p>
+	    </b><pre><code>
+Die vorangehende Checkbox 
+&lt;span ng-show="zeigeText"&gt;sagt ja!&lt;/span&gt;
+&lt;span ng-hide="zeigeText"&gt;anklicken ;)&lt;/span&gt;
+	    </code></pre>
+	    <h5><a href="http://stackoverflow.com/questions/9682092/databinding-in-angularjs">2000 Livebindings pro page</a></h5>
+	    </p>
 	</section>
 	<section>
 		<h2>Data Bindung - {{features[2].headline}}</h2>
 		<div ng-repeat="img in features[2].img">
 			<a href="{{features[2].href}}"><img ng-src="{{img}}" style="margin: -5px;"/></a>
-		</div>		
+		</div>
 		<p>{{features[2].conclusion}}</p>
 	</section>
-	<!--section>
-		<h2>Die Theorie zu den Features {{object}}</h2>
-			<ul>
-				<li ng-repeat="feature in features" 
-                class="highlight-blue">
-                {{feature.headline}}!
-				</li>
-			</ul>
-		<aside class="notes">
-			Zusatzinfos
-		</aside>
-	</section>
-	<section ng-repeat="feature in features">
-		<h2>{{feature.headline}}</h2>
-		<div ng-repeat="img in feature.img">
-			<a ng-href="{{href}}"><img ng-src="{{img}}"/></a>
-		</div>		
-		<p>{{feature.conclusion}}</p>
-	</section-->
-</section>
-
-<section>
+</section><section>
 	<h3>Tieferer Einblick in Angular</h3>
 	<p>
 		<div class="span4 thumbnail">
@@ -459,50 +421,6 @@ Ist das cool?
 			<h4>Module</h4>
 		</div>			
 	</p>
-</section>
-<section>
-	<section>
-		<h3>Services - Services in Angular</h3>
-		<script>
-		angular.module('Vortsetzung', []).controller('einServiceController', function ($scope, coderService) {
-			$scope.$watch("myModel", function watchModel(value) {
-				$scope.myOtherModel =  coderService.concat(value);
-			})
-		}).service('coderService', function(){
-			    this.concat= function(text){
-			        return "Das Coden kann " + text;
-			    }; 
-			});
-		</script>
-		<div ng-controller="einServiceController">
-			<input type="text" ng-model="myModel" style="border" value="weitergehen">
-			<br>
-			<h3> {{myOtherModel}} </h3>
-		</div>
-	</section>
-	<section>
-		<h3>Services - Wie erstelle und verwende ich einen Service?</h3> 
-		<pre><code>
-&lt;script&gt;
-angular
-.controller('einServiceController', function ($scope, coderService) {
-	$scope.myModel = "weitergehen";
-	$scope.$watch("myModel", function watchModel(value) {
-		$scope.myOtherModel =  coderService.concat(value);
-	})
-}).service('coderService', function(){
-    this.concat= function(text){
-        return "Das Coden kann " + text + "!";
-    }; 
-});
-&lt;/script&gt;
-&lt;div ng-controller="einServiceController"&gt;
-	&lt;input type="text" ng-model="myModel" style="border"&gt;
-	&lt;br&gt;
-	&lt;h3&gt; {{myOtherModel}} &lt;/h3&gt;
-&lt;/div&gt;
-		</code></pre>
-	</section>
 </section>
 <section>
 	<section>
@@ -537,54 +455,90 @@ angular
 		</div>
 	</section>
 	<section>
-		<h3>Directives - ngShow ein neugeborenes HTML Element</h3>
+		<h3>Directives - myShow user neues HTML Attribut</h3>
 		<pre><code>
 angular.directive('myShow', function () {
 return {
  restrict: 'A',
  link: function (scope, element, attr) {
     scope.$watch(attr.myShow, function(val){
-    element.css('display', val ? '' : 'none');
-  });
+    	element.css('display', val ? '' : 'none');
+    });
  }
 };
 });</code></pre>
+	<h5><strike>document.getElementBy oder $(xy)</strike></h5>
+	<h4>Binden der DOM Manipulation an das deklarierte Element!!</h4>
+	</section>
+</section>
+<section>
+	<section>
+		<h3>Services - Services in Angular</h3>
+		<script>
+		angular.module('Vortsetzung', []).controller('einServiceController', function ($scope, coderService) {
+			$scope.myModel = "Ich bin ein ";
+			$scope.$watch("myModel", function watchModel(value) {
+				$scope.myOtherModel =  coderService.concat(value);
+			})
+		}).service('coderService', function(){
+			    this.concat= function(text){
+			        return text +  "Service!";
+			    }; 
+			});
+		</script>
+		<div ng-controller="einServiceController">
+			<input type="text" ng-model="myModel" style="border" value="weitergehen">
+			<br>
+			<h3> {{myOtherModel}} </h3>
+		</div>
+	</section>
+	<section>
+		<h3>Services - Wie erstelle und verwende ich einen Service?</h3> 
+		<pre><code ng-non-bindable>
+&lt;script&gt;
+angular
+.controller('einServiceController', function ($scope, coderService) {
+	$scope.myModel = "Ich bin ein ";
+	$scope.$watch("myModel", function watchModel(value) {
+		$scope.myOtherModel =  coderService.concat(value);
+	})
+}).service('coderService', function(){
+	    this.concat= function(text){
+	        return text +  "Service!";
+	    }; 
+});
+&lt;/script&gt;
+&lt;div ng-controller="einServiceController"&gt;
+	&lt;input type="text" ng-model="myModel" style="border"&gt;
+	&lt;br&gt;
+	&lt;h3&gt; {{myOtherModel}} &lt;/h3&gt;
+&lt;/div&gt;
+		</code></pre>
 	</section>
 </section>
 <section>
 		<h3>Module - Kapseln von Anwendungslogik im JS</h3>
 		<pre><code>
-&lt;body ng-app="myApp"&gt;
-....
-&lt;/body&gt;
+angular.module('myApp', ['userModul'])
+.controller('userViewController', function ($scope, user, auth) {...});
 
-&lt;script&gt;
-angular.module('myApp', ['graphics'])
-.controller('einController', function ($scope) {...})
-.service('coderService', function(){...})
-.directive('directiveX', function () {...});
-&lt;/script&gt;
-
-&lt;script&gt;
-angular.module('graphics', [])
-.service('shapeConverter', function(){...})
-.factory('shape', function(){...})
-.directive('sqareCanvas', function('shapeConverter'){...});
-&lt;/script&gt;
+angular.module('userModul', [])
+.factory('user', function(){...})
+.service('auth', function(user){...})
+.directive('registerPopup', function(){...});
 		</code></pre>
 </section>
 <section>
 	<blockquote>Angular is what the web browser would have been, had it been designed for applications.</blockquote>
 	<p>Misko Hevery (Creator of AngularJS)</p>
-</section>
-                <section>
+</section><section>
 	<h2>Angular Komponenten / Extensions</h2>
 	<ol>
-		<li>Templating und Routing</li>
-		<li>UIs und Validierung</li>
+		<li><a href="http://docs.angularjs.org/api/ngRoute.$route">Templating und Routing</a></li>
+		<li><a href="http://angular-ui.github.io/">UIs und Validierung</a></li>
 		<li><a href="http://angularjs.de/artikel/angularjs-i18n-ng-translate">Internatisierung</a></li>
-		<li>REST Client</li>
-		<li>Viiiele weitere Features</li>
+		<li><a href="http://docs.angularjs.org/api/ngResource.$resource">REST Client</a></li>
+		<li><a href="http://ngmodules.org/">Viiiele weitere Features</a></li>
 	</ol>
 </section>
 <section>
@@ -599,7 +553,7 @@ angular.module('graphics', [])
 <section>
 	<blockquote>Pretty sure that HTML6 is going under the codename @angularjs!</blockquote>
 	<p>Some tweet at Twitter</p>
-</section>	<!--section ng-controller="angularExcampleController" >
+</section><!--section ng-controller="angularExcampleController" >
 	<section>
 		<h2>Einblick in die {{object}}</h2>
 			<ul>

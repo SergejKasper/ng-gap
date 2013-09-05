@@ -14,50 +14,6 @@
 </section>
 <section>
 	<section>
-		<h3>Services - Services in Angular</h3>
-		<script>
-		angular.module('Vortsetzung', []).controller('einServiceController', function ($scope, coderService) {
-			$scope.$watch("myModel", function watchModel(value) {
-				$scope.myOtherModel =  coderService.concat(value);
-			})
-		}).service('coderService', function(){
-			    this.concat= function(text){
-			        return "Das Coden kann " + text;
-			    }; 
-			});
-		</script>
-		<div ng-controller="einServiceController">
-			<input type="text" ng-model="myModel" style="border" value="weitergehen">
-			<br>
-			<h3> {{myOtherModel}} </h3>
-		</div>
-	</section>
-	<section>
-		<h3>Services - Wie erstelle und verwende ich einen Service?</h3> 
-		<pre><code>
-&lt;script&gt;
-angular
-.controller('einServiceController', function ($scope, coderService) {
-	$scope.myModel = "weitergehen";
-	$scope.$watch("myModel", function watchModel(value) {
-		$scope.myOtherModel =  coderService.concat(value);
-	})
-}).service('coderService', function(){
-    this.concat= function(text){
-        return "Das Coden kann " + text + "!";
-    }; 
-});
-&lt;/script&gt;
-&lt;div ng-controller="einServiceController"&gt;
-	&lt;input type="text" ng-model="myModel" style="border"&gt;
-	&lt;br&gt;
-	&lt;h3&gt; {{myOtherModel}} &lt;/h3&gt;
-&lt;/div&gt;
-		</code></pre>
-	</section>
-</section>
-<section>
-	<section>
 		<script>
 		angular.module('myUiDirectives', []).directive('myShow', function () {
 		return {
@@ -89,44 +45,80 @@ angular
 		</div>
 	</section>
 	<section>
-		<h3>Directives - ngShow ein neugeborenes HTML Element</h3>
+		<h3>Directives - myShow user neues HTML Attribut</h3>
 		<pre><code>
 angular.directive('myShow', function () {
 return {
  restrict: 'A',
  link: function (scope, element, attr) {
     scope.$watch(attr.myShow, function(val){
-    element.css('display', val ? '' : 'none');
-  });
+    	element.css('display', val ? '' : 'none');
+    });
  }
 };
 });</code></pre>
+	<h5><strike>document.getElementBy oder $(xy)</strike></h5>
+	<h4>Binden der DOM Manipulation an das deklarierte Element!!</h4>
+	</section>
+</section>
+<section>
+	<section>
+		<h3>Services - Services in Angular</h3>
+		<script>
+		angular.module('Vortsetzung', []).controller('einServiceController', function ($scope, coderService) {
+			$scope.myModel = "Ich bin ein ";
+			$scope.$watch("myModel", function watchModel(value) {
+				$scope.myOtherModel =  coderService.concat(value);
+			})
+		}).service('coderService', function(){
+			    this.concat= function(text){
+			        return text +  "Service!";
+			    }; 
+			});
+		</script>
+		<div ng-controller="einServiceController">
+			<input type="text" ng-model="myModel" style="border" value="weitergehen">
+			<br>
+			<h3> {{myOtherModel}} </h3>
+		</div>
+	</section>
+	<section>
+		<h3>Services - Wie erstelle und verwende ich einen Service?</h3> 
+		<pre><code ng-non-bindable>
+&lt;script&gt;
+angular
+.controller('einServiceController', function ($scope, coderService) {
+	$scope.myModel = "Ich bin ein ";
+	$scope.$watch("myModel", function watchModel(value) {
+		$scope.myOtherModel =  coderService.concat(value);
+	})
+}).service('coderService', function(){
+	    this.concat= function(text){
+	        return text +  "Service!";
+	    }; 
+});
+&lt;/script&gt;
+&lt;div ng-controller="einServiceController"&gt;
+	&lt;input type="text" ng-model="myModel" style="border"&gt;
+	&lt;br&gt;
+	&lt;h3&gt; {{myOtherModel}} &lt;/h3&gt;
+&lt;/div&gt;
+		</code></pre>
 	</section>
 </section>
 <section>
 		<h3>Module - Kapseln von Anwendungslogik im JS</h3>
 		<pre><code>
-&lt;body ng-app="myApp"&gt;
-....
-&lt;/body&gt;
+angular.module('myApp', ['userModul'])
+.controller('userViewController', function ($scope, user, auth) {...});
 
-&lt;script&gt;
-angular.module('myApp', ['graphics'])
-.controller('einController', function ($scope) {...})
-.service('coderService', function(){...})
-.directive('directiveX', function () {...});
-&lt;/script&gt;
-
-&lt;script&gt;
-angular.module('graphics', [])
-.service('shapeConverter', function(){...})
-.factory('shape', function(){...})
-.directive('sqareCanvas', function('shapeConverter'){...});
-&lt;/script&gt;
+angular.module('userModul', [])
+.factory('user', function(){...})
+.service('auth', function(user){...})
+.directive('registerPopup', function(){...});
 		</code></pre>
 </section>
 <section>
 	<blockquote>Angular is what the web browser would have been, had it been designed for applications.</blockquote>
 	<p>Misko Hevery (Creator of AngularJS)</p>
 </section>
-                

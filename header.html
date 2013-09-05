@@ -33,8 +33,9 @@
 	<script src="lib/js/head.min.js"></script>
 	<script src="js/reveal.min.js"></script>
 	<script src="js/ng-google-chart.js"></script>
+	
 	<script>
-	angular.module('revealAngular', ['Einstieg','googlechart', 'Vortsetzung'])
+	angular.module('revealAngular', ['Einstieg','googlechart', 'Vortsetzung', 'myUiDirectives'])
 		.controller('ChartCtrl', ['$scope', function ($scope) {
 			$scope.chart = {
   "type": "ColumnChart",
