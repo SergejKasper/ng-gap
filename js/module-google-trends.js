@@ -1,4 +1,4 @@
-angular.module('google-trends', []).directive('google-trends', [function () {
+angular.module('google-trends', []).directive('googleTrends', [function () {
 		return {
 			restrict: 'E',
 			link: function (scope, iElement, iAttrs) {
