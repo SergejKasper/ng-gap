@@ -1,0 +1,208 @@
+                <section>
+					<h2>PhoneGap</h2>
+                    <ul>
+                    	<li>Seit 2011 Apache Cordova</li>
+						<li>Open-Source-Framework</li>
+						<li>Apps für <a href="http://phonegap.com/about/feature">sieben verschiedene mobile Plattformen</a> entwickeln (iOS, Android, Blackberry…)</li>
+						<li>Bietet Schnittstellen für Geräte-Hardware</li>
+					</ul>
+                    
+                    <aside class="notes">
+                    Open-Source-Framework PhoneGap 
+lassen sich Apps für zehn verschiedene Betriebssysteme entwickeln: iOS, Android, Blackberry, Windows Phone, Palm WebOS, Bada und Symbian. 
+Entwickler schreibt den gesamten Code in HTML, CSS und JavaScript. 
+PhoneGap bietet zusätzliche Schnittstellen, um Geräte-Hardware wie Kameras oder Beschleunigungssensoren einzubinden.
+Der Zugriff erfolgt dabei durch JavaScript
+Anschließend kompiliert es alles und stellt Installationsdateien für die verschiedenen Systeme bereit.
+
+ürsprünglich von der Firma Nitobi entwickelt
+2011 von Adobe Systems übernommen an Apache Software Fondation übergeben seitdem heißt es Apache Cordova
+
+                    </aside>
+				</section>
+
+				<section>
+					<h2>PhoneGap einrichten</h2>
+                    <p>Über die Komandozeile (<a href="http://nodejs.org/">NodeJS</a> vorausgesetzt):</p>
+					   <pre><code>
+                        npm install -g phonegap
+                            </code></pre>
+                    <p>Manuell über die <a href="http://phonegap.com/install/">PhoneGap-Plattform</a></p>
+				</section>
+                <section>
+                    <section>
+                        <h2>PhoneGap benutzen</h2>
+                            <p>Anlegen eines neuen Projektes:</p>
+                        <pre><code>
+                        phonegap create Phonecat 
+                                </code></pre>
+                        <p>Umwandlung der Web-App für die jeweilige Plattform:</p>
+                        <pre><code>
+                        phonegap run android
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Einbinden von PhoneGap</h2>
+                        <p>Ab der Version PhoneGap 3.0:</p>
+                        <pre><code>
+                &lt;script type="text/javascript" charset="utf-8"
+                src="phonegap.js"&gt; &lt;/script&gt;
+                     </code></pre>
+                     <p>Vor der Version PhoneGap 3.0:</p>
+                    <pre><code>
+                &lt;script type="text/javascript" charset="utf-8" 
+                src="cordova-2.9.0.js"&gt; &lt;/script&gt;
+                     </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Beispiel Anwendung</h2>
+                        <pre><code>
+&lt;head&gt;
+&lt;title&gt;Gerätedaten-Beispiel&lt;/title&gt;
+&lt;script type="text/javascript" charset="utf-8"
+src="phonegap.js"&gt; &lt;/script&gt;
+&lt;script src="phonegapDevice.js"&gt; &lt;/script&gt;
+&lt;/head&gt;
+	                              
+&lt;body&gt;
+&lt;p id="deviceProperties">Laden der Ger&auml;tedaten...&lt;/p &gt;
+&lt;/body&gt;
+                     </code></pre>
+                    </section>
+<section>
+<h2>Beispiel Anwendung</h2>
+    <p>Code in phonegapDevice.js:</p>
+    <pre><code class="javascript">// Warten auf Cordova
+    document.addEventListener("deviceready", onDeviceReady, false);
+                                
+    // Cordova ist geladen.
+    function onDeviceReady() {
+        var element = document.getElementById('deviceProperties');
+                                
+        element.innerHTML = 'Device Name: ' + device.name + '&lt;br /&gt;' +
+        'Device Cordova: ' + device.cordova + '&lt;br /&gt;' +
+        'Device Platform: ' + device.platform + '&lt;br /&gt;' +
+        'Device UUID: ' + device.uuid + '&lt;br /&gt;' +
+        'Device Version: ' + device.version + '&lt;br /&gt;';
+}</code></pre>
+</section>
+                    
+                    <section>
+                    <h2>Ausgabe von Beispielanwendung</h2>
+                    	<img style="width:800px;" ng-src="img/ausgabe.png"/>
+                    </section>
+                </section>
+				<section>
+				<section>
+					<h2>PhoneGap Anwendung konfigurieren</h2>
+					    <ul>
+                            <li>Mit Hilfe einer config.xml Datei können: Name, Kodierung, Rechte, Icons etc. spezifiziert werden</li>
+                            <li>Dafür muss sich die Konfigurationsdatei im Rootverzeichnis befinden</li>
+                        </ul>
+				</section>
+				<section> 
+					<h2>Beipiel Config-Datei</h2>
+					<pre><code>
+&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+    &lt;widget xmlns = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "de.mms.phoneGapBeipiel" 
+        versionCode = "10" 
+        version   = "1.0.0"&gt;
+
+    &lt;!-- Versionscode ist nur für iOS und Android --&gt;
+
+    &lt;name>Phonecat&lt;/name&gt;
+
+    &lt;description>
+        Eine Beispielandwenung für den DLC 2013. 
+    &lt;/description&gt;
+
+    &lt;author href="http://beispiel.de" email="ivan.demin@t-systems.de"&gt;
+        Ivan Demin & Sergej Kasper
+    &lt;/author&gt;
+
+&lt;/widget&gt;</code></pre>
+				</section>
+				<section> 
+					<h2>Rechte</h2>
+					<pre><code>
+<!-- Wenn keine weiteren Rechte, außer INTERNET, gebraucht 
+werden, dann kann die folgende Zeile angebeben werden: -->
+&lt;preference name="permissions" value="none"/&gt;
+
+<!-- individuelle Vergabe von Rechten -->
+&lt;feature name="http://api.phonegap.com/1.0/device" /&gt;
+&lt;feature name="http://api.phonegap.com/1.0/battery"/&gt;
+&lt;feature name="http://api.phonegap.com/1.0/camera"/&gt;
+&lt;feature name="http://api.phonegap.com/1.0/contacts"/&gt;
+&lt;feature name="http://api.phonegap.com/1.0/file"/&gt;
+&lt;feature name="http://api.phonegap.com/1.0/geolocation"/&gt;
+&lt;feature name="http://api.phonegap.com/1.0/media"/&gt;
+&lt;feature name="http://api.phonegap.com/1.0/network"/&gt;
+&lt;feature name="http://api.phonegap.com/1.0/notification"/&gt;
+
+</code></pre>
+				    </section>
+				<section> 
+					<h2>Access Element</h2>
+<p>Erlaubt den Zugriff auf Ressourcen anderer Domains</p>
+<pre><code>&lt;!-- erlaubt lokale Seiten --&gt;
+&lt;access origin="http://127.0.0.1*"/&gt; 
+&lt;!-- individueller Zugriff --&gt;
+&lt;access origin="https://build.phonegap.com" /&gt;
+&lt;!-- erlaubt Zugriff auf alle externe Ressourcen --&gt;
+&lt;access origin="*" /&gt;
+</code></pre>
+				    </section>
+				</section> 
+                <section>
+                    <h2>PhoneGap Plugins</h2>
+                    <ul>
+                        <li><a href="http://github.com/phonegap-build/BarcodeScanner.git">Barcode Scanner</a></li>
+                        <li><a href="https://github.com/chariotsolutions/phonegap-nfc.git">NFC</a></li>
+                        <li><a href="https://github.com/shaders/pushwoosh-phonegap-build-plugin">Push Notification</a></li>
+                    </ul>
+                </section>
+				<section>
+				<section>
+					<h2>Ripple Emulator</h2>
+					<a href=""><img ng-src="img/rippleEmulator.png"></a> 
+				</section>
+				<section>
+					<h2>Ripple Emulator</h2>
+                    <ul>
+						<li><a href="https://chrome.google.com/webstore/search/ripple%20emulator?hl=de&utm_source=chrome-ntp-launcher">Google Chrome Erweiterung</a></li>
+						<li>Emuliert mobile Umgebungen</li>
+						<li>Erleichtert die Entwicklung und Testung von Web/Hybrid-Apps geeignet</li>
+                        <li>Apache Cordova/PhoneGap integriert</li>
+					</ul>
+                    
+                <aside class="notes">
+Google Chrome Erweiterung
+Mit diesem Tool ist es möglich die einzelnen Bildschirmgrößen von Smartphones sowie Events wie dem drücken der Zurücktaste auf einem Androidgerät zu simulieren
+Nützlich um zu schauen ob das Userinterface für den Großteil von Smartphone- und Tabletgeräten geeignet ist
+PhoneGap ist in dem Emulator integriert kann so kann simuliert werden wie PhoneGap mit der App interagiert
+                </aside>
+
+				</section>
+
+				</section>
+
+				<section>
+				<section>
+					<h2>PhoneGap Build</h2>
+					<a href="https://build.phonegap.com/"><img ng-src="img/phoneGapBuild.png"></a>
+				</section>
+				<section>
+					<h2>PhoneGap Build</h2>
+					<ul>
+						<li>Cloudservice</li>
+						<li>Kompiliert Quellcode in native Anwendungen</li>
+						<li>Konfiguriert die App für die jeweilige Zielplattform</li>
+					</ul>
+				</section>
+
+				</section>

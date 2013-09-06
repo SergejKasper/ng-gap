@@ -1,0 +1,124 @@
+<section>
+	<h3>Einstieg in Angular</h3>
+	<p>
+		<div class="span4 thumbnail">
+			<h4>MVC</h4>
+		</div>
+		<div class="span4 thumbnail">
+			<h4>HTML als DSL</h4>
+		</div>
+		<div class="span4 thumbnail">
+			<h4>Data Binding</h4>
+		</div>			
+	</p>
+</section>
+<section>
+	<section>
+	 	<h3>MVC - Aufbau einer AngularJS Anwendung</h3>
+		<div ng-controller="einController">
+			<input type="text" ng-model="model" style="border">
+			<br>
+			<h3> Das Coden {{model  + '!'}} </h3>
+		</div>
+	</section>
+	<section>
+		<h3>Einstieg in Angular</h3>
+	<div style="float: left;">
+		<p>JS</p>
+		<pre style="width: 100%;"><code ng-non-bindable>
+&lt;script src="angular.min.js"&gt;
+&lt;/script&gt;
+&lt;script&gt;
+ function aController($scope){
+  $scope.einModel = "kann beginnen";
+ }
+&lt;/script&gt;
+		</code></pre>
+		</div>
+		<div style="float: right;">
+		<p>HTML</p>
+		<pre style="width: 100%;"><code ng-non-bindable>
+&lt;body ng-app&gt;
+ &lt;div ng-controller="einController"&gt;
+ &lt;input type="text" ng-model="einModel"&gt;
+	Das Coden {{einModel + "!"}}
+ &lt;/div&gt;
+&lt;/body&gt;
+		</code></pre>
+		</div>
+	</section>
+	<section>
+		<h2>{{features[1].headline}}</h2>
+		<div ng-repeat="img in features[1].img">
+			<a href="{{features[1].href}}"><img ng-src="{{img}}"/></a>
+		</div>		
+		<p>{{features[1].conclusion}}</p>
+	</section>
+</section>
+<section>
+	<section>
+		<h3>HTML als DSL - Angular macht HTML erweiterbar</h3>
+		<h4>Ist das gut?</h4> 
+			<input ng-model="zeigeText" type="checkbox">
+		<p ng-show="zeigeText">
+		    <b>Auf jeden Fall!</b>
+		<pre><code>
+Ist das cool? 
+&lt;input ng-model="zeigeText" type="checkbox"&gt;
+&lt;b ng-show="zeigeText"&gt; Auf jeden Fall!&lt;/b&gt;</code></pre>
+		</p>
+	</section>
+	<section>
+		<h3>HTML als DSL - Alternative in JQuery</h3>
+		<pre><code>
+Ist das cool? 
+&lt;input id="zeigeText" type="checkbox"&gt;
+&lt;b id="einText"&gt; Auf jeden Fall!&lt;/b&gt;</code></pre>
+		<pre><code>$(function() {
+    function showOrHide() {
+        var isChecked = $('#zeigeText').is(':checked');
+        
+        // imperative Code dependency
+        var fn = $('#einText');
+        if (isChecked)
+            fn.show();
+        else
+            fn.hide();
+    }
+    $('#zeigeText').change(function() {
+        showOrHide();
+    });
+    showOrHide();
+});</code></pre>
+	</section>
+	<section>
+		<h2>HTML als DSL - {{features[0].headline}}</h2>
+		<div ng-repeat="img in features[0].img">
+			<a href="{{features[0].href}}"><img ng-src="{{img}}"/></a>
+		</div>		
+		<p>{{features[0].conclusion}}</p>
+	</section>
+</section>
+<section>
+	<section>
+	<h3>Data Bindung - Bietet Angular ein Two-Way Binding?</h3>
+	<input ng-model="zeigeText" type="checkbox">
+	    <p><b>Die vorangehende Checkbox 
+	    <span ng-show="zeigeText">sagt ja!</span>
+	    <span ng-hide="zeigeText">anklicken ;)</span>
+	    </b><pre><code>
+Die vorangehende Checkbox 
+&lt;span ng-show="zeigeText"&gt;sagt ja!&lt;/span&gt;
+&lt;span ng-hide="zeigeText"&gt;anklicken ;)&lt;/span&gt;
+	    </code></pre>
+	    <h5><a href="http://stackoverflow.com/questions/9682092/databinding-in-angularjs">2000 Livebindings pro page</a></h5>
+	    </p>
+	</section>
+	<section>
+		<h2>Data Bindung - {{features[2].headline}}</h2>
+		<div ng-repeat="img in features[2].img">
+			<a href="{{features[2].href}}"><img ng-src="{{img}}" style="margin: -5px;"/></a>
+		</div>
+		<p>{{features[2].conclusion}}</p>
+	</section>
+</section>

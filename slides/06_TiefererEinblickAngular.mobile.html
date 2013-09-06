@@ -1,0 +1,100 @@
+<section>
+	<h3>Tieferer Einblick in Angular</h3>
+	<p>
+		<div class="span4 thumbnail">
+			<h4>Directives</h4>
+		</div>
+		<div class="span4 thumbnail">
+			<h4>Services</h4>
+		</div>
+		<div class="span4 thumbnail">
+			<h4>Module</h4>
+		</div>			
+	</p>
+</section>
+<section>
+	<section>
+		<h3>Directives - Wie erstelle ich einen eigenen HTML Tag?</h3> 
+		<div class="switch">
+			<input ng-model="showMe" type="checkbox">
+			<label><i></i></label>
+		</div>
+		<div my-show="showMe">
+		<pre><code>
+&lt;h3&gt;Wie erstelle ich einen eigenen Tag?&lt;/h3&gt; 
+&lt;div class="switch"&gt;
+	&lt;input ng-model="showMe" type="checkbox"&gt;
+	&lt;label&gt;&lt;i&gt;&lt;/i&gt;&lt;/label&gt;
+&lt;/div&gt;
+&lt;div my-show="showMe"&gt;
+    &lt;pre&gt;&lt;code&gt;/*Dieses Snippet*/&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+		</code></pre>
+		</div>
+	</section>
+	<section>
+		<h3>Directives - myShow user neues HTML Attribut</h3>
+		<pre><code>
+angular.directive('myShow', function () {
+return {
+ restrict: 'A',
+ link: function (scope, element, attr) {
+    scope.$watch(attr.myShow, function(val){
+    	element.css('display', val ? '' : 'none');
+    });
+ }
+};
+});</code></pre>
+	<h5><strike>document.getElementBy oder $(xy)</strike></h5>
+	<h4>Binden der DOM Manipulation an das deklarierte Element!!</h4>
+	</section>
+</section>
+<section>
+	<section>
+		<h3>Services - Services in Angular</h3>
+		<div ng-controller="einServiceController">
+			<input type="text" ng-model="myModel" style="border" value="weitergehen">
+			<br>
+			<h3> {{myOtherModel}} </h3>
+		</div>
+	</section>
+	<section>
+		<h3>Services - Wie erstelle und verwende ich einen Service?</h3> 
+		<pre><code ng-non-bindable>
+&lt;script&gt;
+angular
+.controller('einServiceController', function ($scope, coderService) {
+	$scope.myModel = "Ich bin ein ";
+	$scope.$watch("myModel", function watchModel(value) {
+		$scope.myOtherModel =  coderService.concat(value);
+	})
+}).service('coderService', function(){
+	    this.concat= function(text){
+	        return text +  "Service!";
+	    }; 
+});
+&lt;/script&gt;
+&lt;div ng-controller="einServiceController"&gt;
+	&lt;input type="text" ng-model="myModel" style="border"&gt;
+	&lt;br&gt;
+	&lt;h3&gt; {{myOtherModel}} &lt;/h3&gt;
+&lt;/div&gt;
+		</code></pre>
+	</section>
+</section>
+<section>
+		<h3>Module - Kapseln von Anwendungslogik im JS</h3>
+		<pre><code>
+angular.module('myApp', ['userModul'])
+.controller('userViewController', function ($scope, user, auth) {...});
+
+angular.module('userModul', [])
+.factory('user', function(){...})
+.service('auth', function(user){...})
+.directive('registerPopup', function(){...});
+		</code></pre>
+</section>
+<section>
+	<blockquote>Angular is what the web browser would have been, had it been designed for applications.</blockquote>
+	<p>Misko Hevery (Creator of AngularJS)</p>
+</section>
